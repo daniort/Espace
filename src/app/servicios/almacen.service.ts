@@ -30,14 +30,16 @@ export class AlmacenService {
     console.log('Metodo edit');
   }
   deleteProduct(id: string){
-    console.log('Metodo delete');
+    console.log("producto elimnado en el service");
+    this.productosDoc=this.db.doc(`productos/${id}`);
+    this.productosDoc.delete();
   }
   getProducts(){
     return this.productos;
   }
   updateProduct(producto: ProductoInterface){
     console.log("productoeditado en el service");
-    this.productosDoc=this.db.doc(`productos/${producto.id}`); 
+    this.productosDoc=this.db.doc(`productos/${producto.id}`);
     this.productosDoc.update(producto);
   }
 
