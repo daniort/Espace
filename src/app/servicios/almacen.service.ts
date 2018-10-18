@@ -24,12 +24,16 @@ export class AlmacenService {
     );
   }
   addProduct(producto: ProductoInterface){
-    console.log("este es el add producto del servicio");
     this.ProductosCollection.add(producto);
-    console.log("Producto Agregado");
+  }
+  editProduct(producto: ProductoInterface){
+    console.log('Metodo edit');
+  }
+  deleteProduct(id: string){
+    console.log('Metodo delete');
   }
   getProducts(){
-    console.log("Arergñlo obtenido");
     return this.productos;
   }
+
 }

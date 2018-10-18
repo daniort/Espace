@@ -1,0 +1,26 @@
+
+
+#agotado{
+  color: Red;
+  }
+a{
+  color: black ;
+  width: 50%;
+  text-align: center;
+  -webkit-transition-duration: 0.2s; /* Safari */
+   transition-duration: 0.2s;
+}
+#edit:hover{
+  border-bottom: solid 2px;
+  border-color:  #00d1b2;
+  color:  #00d1b2;
+}
+#dele:hover{
+  border-bottom: solid 2px;
+  border-color: red;
+  color: red;
+  }
+.pupConfirmer{
+  text-align: center;
+    width: 40%;
+}

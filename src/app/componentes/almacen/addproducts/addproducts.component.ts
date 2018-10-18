@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms/src/directives/ng_form';
 import { AlmacenService } from '../../../servicios/almacen.service';
 import { ProductoInterface } from '../../../interfaces/productointerface';
 
+
 @Component({
   selector: 'app-addproducts',
   templateUrl: './addproducts.component.html',
@@ -21,7 +22,8 @@ export class AddproductsComponent implements OnInit {
   onGuardarProducto(myForm: NgForm){
     console.log("metodo guardar producto");
     console.log(this.producto);
+     //this._location.back();
     this.AlmacenService.addProduct(this.producto);
     }
-    
+
 }
