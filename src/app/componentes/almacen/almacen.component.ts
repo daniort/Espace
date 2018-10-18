@@ -19,8 +19,9 @@ productonuevo:ProductoInterface={
     editState:boolean=false;
   deleteState:boolean=false;
   createState:boolean=false;
-
   idToDelete:string;
+  searchText:string; //eto es para el pipe de busqueda
+
   constructor(public AlmacenService: AlmacenService) { }
   ngOnInit() {
     this.AlmacenService.getProducts().subscribe(producto =>{

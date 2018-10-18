@@ -4,7 +4,7 @@
 <!-- botones -->
 <div class="columns botones" >
   <div class="column is-four-fifths">
-      <input class="input is-primary buscar inputs" type="text" placeholder="Buscar en Almacén" id="">
+      <input class="input is-primary buscar inputs" [(ngModel)]="searchText" type="text" placeholder="Buscar en Almacén" id="">
   </div>
   <div class="column">
     <button class="button is-primary inputs" (click)="onCreate($event)" type="submit">
