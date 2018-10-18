@@ -33,7 +33,15 @@ onDeleteProducto(event, id:string){
   this.idToDelete=id;
   }
   onDeleteConfirmer(){
+    this.deleteState= false;
     this.AlmacenService.deleteProduct(this.idToDelete);
   }
-
+  onDeleteCancel(){
+    this.deleteState= false;
+    this.idToDelete='';
+  }
+onGuardar(){
+console.log(this.productoeditar);
+this.AlmacenService.updateProduct(this.productoeditar);
+}
 }

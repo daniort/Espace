@@ -1,5 +1,6 @@
 
 <div class="container ">
+
 <!-- botones -->
 <div class="columns botones" >
   <div class="column is-four-fifths">
@@ -10,7 +11,7 @@
       <i class="fas fa-plus"></i>
        Agregar Producto</button>
   </div>
-  </div>
+</div>
   <!-- contenido -->
   <div class="is-multiline columns productoitem">
     <div class="column is-one-quarter-desktop is-one-third-tablet" *ngFor="let product of productoitem;let i=index">
@@ -84,19 +85,19 @@
       </div>
       <footer class="card-footer">
         <a  class="card-link" (click)="onDeleteConfirmer()" id="dele">Si, Eliminar</a>
-        <a  class="card-link" (click)="onCancel($event, product)" id="edit">Cancelar</a>
+        <a  class="card-link" (click)="onDeleteCancel()" id="edit">Cancelar</a>
       </footer>
     </div>
 </div>
 
 <div *ngIf="editState" class="pupConfirmer">
-  <form class="" action="index.html" method="post">
+
     <div class="card">
         <header class="card-header">
 
           <p class="card-header-title">
             <i class="fas fa-marker"></i>
-            Editar Producto: {{productoeditar.nombre}}
+            Editar Producto
           </p>
           <div class="navbar-end">
             <span class="icon">
@@ -108,6 +109,7 @@
         </header>
         <div class="card-content">
           <div class="content">
+            <form class="" >
             <div class="field">
               <label  class="label">Nombre </label>
               <div class="control">
@@ -134,14 +136,15 @@
                 <input [(ngModel)]="productoeditar.venta" #venta="ngModel" name="venta" type="number" class="input" placeholder="$000.00" value="{{productoeditar.venta}}">
               </div>
             </div>
+            </form>
           </div>
         </div>
         <footer class="card-footer">
-          <a  class="card-link" (click)="onDeleteConfirmer($event, product.id)" id="edit">Guardar</a>
+          <a  class="card-link" (click)="onGuardar($event)" id="edit">Guardar</a>
           <a  class="card-link" (click)="onCancel($event, product)" id="dele">Cancelar</a>
         </footer>
       </div>
-  </form>
+
 </div>
 
 </div>

@@ -35,5 +35,10 @@ export class AlmacenService {
   getProducts(){
     return this.productos;
   }
+  updateProduct(producto: ProductoInterface){
+    console.log("productoeditado en el service");
+    this.productosDoc=this.db.doc(`productos/${producto.id}`); 
+    this.productosDoc.update(producto);
+  }
 
 }
