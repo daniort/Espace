@@ -13,7 +13,7 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { DeudoresComponent } from './componentes/deudores/deudores.component';
 import { AlmacenComponent } from './componentes/almacen/almacen.component';
 import { HomeComponent } from './componentes/home/home.component';
-import { AddproductsComponent } from './componentes/almacen/addproducts/addproducts.component';
+
 
 import {AlmacenService} from './servicios/almacen.service';
 
@@ -23,7 +23,6 @@ const routes: Routes = [
 { path: 'home', component: HomeComponent } ,
 { path: 'deudores', component: DeudoresComponent } ,
 { path: 'almacen', component: AlmacenComponent },
-{ path: 'addproducts', component: AddproductsComponent },
 { path: '**', component: HomeComponent }
 ];
 
@@ -34,7 +33,7 @@ const routes: Routes = [
     DeudoresComponent,
     AlmacenComponent,
     HomeComponent,
-    AddproductsComponent
+    
   ],
   imports: [
     BrowserModule,

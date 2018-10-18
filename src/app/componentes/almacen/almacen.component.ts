@@ -9,9 +9,17 @@ import { ProductoInterface } from '../../interfaces/productointerface';
 })
 export class AlmacenComponent implements OnInit {
   productoitem: ProductoInterface[];
-  editState:boolean=false;
+productoeditar:ProductoInterface;
+productonuevo:ProductoInterface={
+        nombre:'',
+        compra:0,
+        cantidad:0,
+        venta:0,
+      };
+    editState:boolean=false;
   deleteState:boolean=false;
-  productoeditar:ProductoInterface;
+  createState:boolean=false;
+
   idToDelete:string;
   constructor(public AlmacenService: AlmacenService) { }
   ngOnInit() {
@@ -33,15 +41,24 @@ onDeleteProducto(event, id:string){
   this.idToDelete=id;
   }
   onDeleteConfirmer(){
-    this.deleteState= false;
     this.AlmacenService.deleteProduct(this.idToDelete);
-  }
-  onDeleteCancel(){
     this.deleteState= false;
-    this.idToDelete='';
+  }
+  onCancel(){
+    this.deleteState= false;
+    this.editState=false;
+    this.createState=false;
   }
 onGuardar(){
 console.log(this.productoeditar);
 this.AlmacenService.updateProduct(this.productoeditar);
+this.editState= false;
+}
+onCreate(){
+ this.createState=true;
+}
+onCreateYa(){
+  this.AlmacenService.addProduct(this.productonuevo);
+  this.createState=false;
 }
 }
