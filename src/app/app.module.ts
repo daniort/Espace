@@ -16,6 +16,7 @@ import { HomeComponent } from './componentes/home/home.component';
 
 
 import {AlmacenService} from './servicios/almacen.service';
+//import {DeudoraService} from './servicios/almacen.service';
 
 
 const routes: Routes = [
@@ -33,7 +34,7 @@ const routes: Routes = [
     DeudoresComponent,
     AlmacenComponent,
     HomeComponent,
-    
+
   ],
   imports: [
     BrowserModule,

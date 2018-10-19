@@ -1,3 +1,199 @@
-<p>
-  deudores works!
-</p>
+
+<div class="container ">
+
+<!-- botones -->
+<div class="columns botones" >
+  <div class="column is-four-fifths">
+      <input class="input is-primary buscar inputs" [(ngModel)]="searchText" type="text" placeholder="Buscar en la Lista" id="">
+  </div>
+  <div class="column">
+    <button class="button is-primary inputs" (click)="onCreateDeuda($event)" type="submit">
+      <i class="fas fa-plus"></i>
+       Agregar Deuda</button>
+  </div>
+</div>
+  <!-- contenido -->
+  <table class="table">
+    <thead class="thead">
+      <tr>
+        <th>#</th>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Concepto</th>
+        <th>Nota</th>
+        <th>Total</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let duda of deudoritem;let i=index">
+         <th>{{i}}</th>
+         <th>12/12/2018</th>
+         <th>{{duda.nombre}}</th>
+         <th>{{duda.descripcion}}</th>
+           <th>{{duda.nota}}</th>
+           <th>${{duda.cantidad}}.00</th>
+         <th><i class="fas fa-edit" (click)="onEditDeuda($event,duda)"></i><i class="fas fa-money-bill-alt"(click)="onDeleteDeuda($event,duda.id)"></i></th>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>#</th>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Concepto</th>
+        <th>Nota</th>
+        <th>Total</th>
+        <th>Acciones</th>
+      </tr>
+    </tfoot>
+
+  </table>
+
+
+
+
+  </div>
+
+
+  <div *ngIf="editState" class="pupConfirmer">
+    <!--editar deuda -->
+      <div class="card content-modal-edit">
+          <header class="card-header">
+            <p class="card-header-title">
+              <i class="fas fa-marker"></i>
+              Editar Producto
+            </p>
+            <div class="navbar-end">
+              <span class="icon">
+                <i class="fas fa-times" (click)="onCancel($event)"></i>
+              </span>
+            </div>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <form class="" >
+              <div class="field">
+                <label  class="label">Nombre </label>
+                <div class="control">
+                    <input [(ngModel)]="productoeditar.nombre" #nombre="ngModel" name="nombre"  type="email" class="input"  placeholder="Nombre" value="{{productoeditar.name}}">
+                </div>
+              </div>
+              <div class="field">
+                <label  class="label">Piezas Adquiridas</label>
+                <div class="control">
+                  <input [(ngModel)]="productoeditar.cantidad" #cantidad="ngModel" name="cantidad" type="number" class="input"  placeholder="0.00" value="{{productoeditar.cantidad}}">
+                </div>
+              </div>
+
+              <div class="field">
+                <label  class="label">Precio de Compra</label>
+                <div class="control">
+                  <input [(ngModel)]="productoeditar.compra" #compra="ngModel" name="compra" type="number" class="input" placeholder="$000.00" value="{{productoeditar.compra}}">
+                </div>
+              </div>
+
+              <div class="field">
+                <label  class="label">Precio de Venta</label>
+                <div class="control">
+                  <input [(ngModel)]="productoeditar.venta" #venta="ngModel" name="venta" type="number" class="input" placeholder="$000.00" value="{{productoeditar.venta}}">
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+          <footer class="card-footer">
+              <a  class="card-link" (click)="onGuardar($event)" id="edit">Guardar</a>
+              <a  class="card-link" (click)="onCancel($event)" id="dele">Cancelar</a>
+            </footer>
+        </div>
+
+  </div>
+
+
+  <div *ngIf="crearState" class="pupConfirmer">
+    <!--crear deuda -->
+      <div class="card content-modal-crea">
+          <header class="card-header">
+            <p class="card-header-title">
+              <i class="fas fa-credit-card"></i>
+              Nuevo Credito
+            </p>
+            <div class="navbar-end">
+              <span class="icon">
+                 <i class="fas fa-times" (click)="onCancel($event)"></i>
+              </span>
+            </div>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              <form class="" >
+              <div class="field">
+                <label  class="label">Nombre Completo</label>
+                <div class="control">
+                    <input
+                    [(ngModel)]="deudornuevo.nombre"
+                    #nombre="ngModel" name="nombre"  type="text"
+                    class="input"  placeholder="Juanito Oso" >
+                </div>
+              </div>
+              <div class="field">
+                <label  class="label">Cantidad</label>
+                <div class="control">
+                  <input [(ngModel)]="deudornuevo.cantidad" #cantidad="ngModel" name="cantidad" type="number" class="input"  placeholder="$$$">
+                </div>
+              </div>
+
+              <div class="field">
+                <label  class="label">Descripcion de Compra</label>
+                <div class="control">
+                  <input [(ngModel)]="deudornuevo.descripcion" #descripcion="ngModel" name="descripcion" type="text" class="input" placeholder="Dos Galletas Marias" >
+                </div>
+              </div>
+
+              <div class="field">
+                <label  class="label">Nota Extra</label>
+                <div class="control">
+                  <input [(ngModel)]="deudornuevo.nota" #nota="ngModel" name="nota" type="text" class="input" placeholder="Dijo que venia al dia siguiente" >
+                </div>
+              </div>
+
+
+
+              </form>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a  class="card-link" (click)="onCreateYa($event)" id="edit">Crear</a>
+            <a  class="card-link" (click)="onCancel($event)" id="dele">Cancelar</a>
+          </footer>
+        </div>
+
+  </div>
+ <!--eliminar deuda -->
+  <div *ngIf="deleState" class="pupConfirmer">
+
+    <div class="card content-modal-delete">
+        <header class="card-header">
+          <p class="card-header-title">
+            ¿Saldar Deuda?
+          </p>
+          <div class="navbar-end">
+            <span class="icon">
+              <i class="fas fa-times" (click)="onCancel($event)"></i>
+            </span>
+          </div>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            ¿Estas seguro que quieres eliminar esta deuda?
+            <br>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a  class="card-link" (click)="onDeleteConfirmer($event)" id="dele">Si, Eliminar</a>
+          <a  class="card-link" (click)="onCancel($event)" id="edit">Cancelar</a>
+        </footer>
+      </div>
+
+  </div>
