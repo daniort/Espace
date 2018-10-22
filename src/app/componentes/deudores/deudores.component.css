@@ -31,7 +31,7 @@ a{
 }
 .content-modal-delete{
   width: 40%;
-  height: 30%;
+  height: 66%;
   position: absolute;
   top: 0;
   left: 0;
@@ -39,7 +39,7 @@ a{
   right: 0;
   margin: auto;
   font-size: 1.5em;
-  text-align: center;
+  text-align: left;
 }
 .content-modal-edit{
   width: 40%;
@@ -75,7 +75,7 @@ a{
     .fas{
       margin-right: 10%;
     }
-span:hover{
+.close:hover{
 background-color: red;
 color: white;
 }
@@ -90,3 +90,101 @@ color: white;
   border-color:  #00d1b2;
   color:  #00d1b2;
   }
+  .celda-numero{
+    text-align: right;
+    width: 8%;
+  }
+tfoot{
+  background-color: #dddddd;
+}
+
+thead{
+  text-align: center;
+  background-color: #00d1b2
+}
+fa-dollar-sign{
+  text-align: left;
+}
+.signo{
+  text-align: right;
+  width: 3%;
+}
+.deuda-total{
+  text-align: right;
+}
+.tr-body:hover{
+  background-color: #f5f5f5;
+  border-right: 7px solid  #00d1b2;
+}
+.btn-acciones{
+    text-align: center;
+}
+.datoVacio{
+  color: rgba(0,0,0,0.2);
+}
+.fa-toggle-on:hover{
+  color: #00d1b2;
+}
+form{
+  text-align: left;
+}
+#total{
+  font-size: 15pt;
+
+  font-weight: bold;
+  color: black;
+}
+.is-danger, .is-success{
+
+    height: 40px;
+}
+.deudatotal{
+  font-size: 15pt;
+}
+
+.message1{
+border-left: 7px solid  #00d1b2;
+border-right:  7px solid  #00d1b2;
+ position: fixed;
+ top: 30%;
+ left: 35%;
+ transition: all .5s;
+  width: 30%;
+  animation-delay: 1.5s;
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+.message1{
+border-left: 7px solid  #ffdd57;
+border-right:  7px solid  #ffdd57;
+ position: fixed;
+ top: 30%;
+ left: 35%;
+ transition: all .5s;
+  width: 30%;
+  animation-delay: 1.5s;
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+.message3{
+border-left: 7px solid  #ff3860;
+border-right:  7px solid  #ff3860;
+ position: fixed;
+ top: 30%;
+ left: 35%;
+ transition: all .5s;
+  width: 30%;
+  animation-delay: 1.5s;
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+@keyframes slidein {
+  from {
+    opacity: 1
+  }
+  to {
+  opacity: 0;
+  font-size: 2pt;
+  width: 10%;
+  }
+}

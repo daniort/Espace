@@ -16,6 +16,8 @@ import { HomeComponent } from './componentes/home/home.component';
 
 
 import {AlmacenService} from './servicios/almacen.service';
+import {HomeService} from './servicios/home.service';
+import {DeudasService} from './servicios/deudas.service';
 //import {DeudoraService} from './servicios/almacen.service';
 
 
@@ -43,7 +45,7 @@ const routes: Routes = [
     FormsModule,
     AngularFirestoreModule,
   ],
-  providers: [AlmacenService],
+  providers: [AlmacenService,HomeService,DeudasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
