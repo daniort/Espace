@@ -4,5 +4,6 @@ export interface DeudorInterface{
   cantidad ?: number;
   descripcion ?: string;
   nota ?: string;
+  fecha ?: string;
 
 }

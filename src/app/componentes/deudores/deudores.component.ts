@@ -16,14 +16,15 @@ export class DeudoresComponent implements OnInit {
       cantidad:0,
       descripcion:'',
       nota:'',
+      fecha: Date(),
   };
   crearState:boolean=false;
   ediState:boolean=false;
   deleState:boolean=false;
   idToDelete:string;
   totalDeudas=0;
-  abono:number;
-  resto=0;
+  abono=0;
+  resto:number;
   desbloq=false;
   mencrearState:boolean=false;
   menediState:boolean=false;
@@ -32,7 +33,6 @@ export class DeudoresComponent implements OnInit {
   ngOnInit() {
     this.DeudasService.getDeudas().subscribe(deuda =>{
       this.deudoritem=deuda;
-       console.log(this.deudoritem);
        for (let entry of this.deudoritem) {
        this.totalDeudas += entry.cantidad;
        console.log(this.totalDeudas);
@@ -48,8 +48,6 @@ export class DeudoresComponent implements OnInit {
   }
   onCreateYa(){
     this.DeudasService.addDeuda(this.deudornuevo);
-    //this.deudornuevo=null;
-    this.totalDeudas=0;
     this.onCancel();
     this.onMensajeCreador();
   }
@@ -58,24 +56,19 @@ export class DeudoresComponent implements OnInit {
     this.ediState=false;
     this.deleState=false;
     this.desbloq = false;
+    this.totalDeudas=0;
     this.abono=0;
     this.deudaParaEditar=null;
   }
   onDeleteConfirmer($event){
     this.resto=this.deudaParaEditar.cantidad - this.abono;
     if (this.resto==0){
-      console.log("elimina if");
       this.DeudasService.deleteDeuda(this.deudaParaEditar.id);
-      this.totalDeudas=0;
-      this.abono=0;
       this.onCancel();
       this.onMensajeEliminado();
         }else{
-          console.log("edita if");
           this.deudaParaEditar.cantidad=this.resto;
           this.DeudasService.editDeuda(this.deudaParaEditar);
-          this.totalDeudas=0;
-          this.abono=0;
           this.onCancel();
           this.onMensajeEditado();
         }
@@ -89,7 +82,6 @@ export class DeudoresComponent implements OnInit {
   }
   onGuardar($event){
     this.DeudasService.editDeuda(this.deudaParaEditar);
-    this.totalDeudas=0;
     this.onCancel();
     this.onMensajeEditado();
   }
