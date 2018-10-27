@@ -14,7 +14,7 @@ export class DeudasService {
   deudasDoc: AngularFirestoreDocument <DeudorInterface>;
 
   constructor(public db: AngularFirestore) {
-    this.DeudasCollection = db.collection<DeudorInterface>('deudas');
+    this.DeudasCollection = db.collection<DeudorInterface>('deudas', ref => ref.orderBy('fecha','desc'));
     this.deudas= this.DeudasCollection.snapshotChanges().pipe(
       map(actions => actions.map(a=>{
         const data = a.payload.doc.data() as DeudorInterface;
@@ -27,6 +27,8 @@ export class DeudasService {
     return this.deudas;
   }
   addDeuda(deuda:DeudorInterface){
+    const fechaNow = Date.now();
+    deuda.fecha=fechaNow;
     this.DeudasCollection.add(deuda);
   }
   deleteDeuda(id: string){

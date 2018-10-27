@@ -1,7 +1,7 @@
 
 
 /* Sidebar Styles */
-.navbar-inverse, button{
+.navbar, button{
   background-color:  #00d1b2;
 }
 #title-nav{
@@ -16,9 +16,9 @@ button{
     background-color: #00d1b0; /* Green */
     color: white;
   }
-  .fas{
-    margin-right: 5%;
-  }
   strong{
     color: black;
+  }
+  .fa-bars{
+    color: white;
   }

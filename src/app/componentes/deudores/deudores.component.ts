@@ -16,7 +16,7 @@ export class DeudoresComponent implements OnInit {
       cantidad:0,
       descripcion:'',
       nota:'',
-      fecha: Date(),
+      fecha:'',
   };
   crearState:boolean=false;
   ediState:boolean=false;
@@ -49,6 +49,7 @@ export class DeudoresComponent implements OnInit {
   onCreateYa(){
     this.DeudasService.addDeuda(this.deudornuevo);
     this.onCancel();
+    this.totalDeudas=0;
     this.onMensajeCreador();
   }
   onCancel(){
@@ -56,20 +57,22 @@ export class DeudoresComponent implements OnInit {
     this.ediState=false;
     this.deleState=false;
     this.desbloq = false;
-    this.totalDeudas=0;
     this.abono=0;
     this.deudaParaEditar=null;
+    this.deudornuevo=null;
   }
   onDeleteConfirmer($event){
     this.resto=this.deudaParaEditar.cantidad - this.abono;
     if (this.resto==0){
       this.DeudasService.deleteDeuda(this.deudaParaEditar.id);
       this.onCancel();
+      this.totalDeudas=0;
       this.onMensajeEliminado();
         }else{
           this.deudaParaEditar.cantidad=this.resto;
           this.DeudasService.editDeuda(this.deudaParaEditar);
           this.onCancel();
+          this.totalDeudas=0;
           this.onMensajeEditado();
         }
       }
@@ -83,6 +86,7 @@ export class DeudoresComponent implements OnInit {
   onGuardar($event){
     this.DeudasService.editDeuda(this.deudaParaEditar);
     this.onCancel();
+    this.totalDeudas=0;
     this.onMensajeEditado();
   }
   onMensajeCreador(){

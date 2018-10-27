@@ -29,7 +29,7 @@
     <tbody>
       <tr class="tr-body"  *ngFor="let duda of deudoritem;let i=index">
          <th>{{i}}</th>
-         <th>12/12/2018</th>
+         <th>{{ duda.fecha | date:'d/M/y'}}</th>
          <th>{{duda.nombre}}</th>
          <th>{{duda.descripcion}}</th>
            <th>
@@ -123,8 +123,8 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-disable"   *ngIf="!nombre.valid  || !descripcion.valid  || deudaParaEditar.cantidad <0; else desactivado" disabled>Guardar</button>
-        <ng-template #desactivado>
+        <button class="button is-disable"   *ngIf="!nombre.valid  || !descripcion.valid  || deudaParaEditar.cantidad <0; else btnactive" disabled>Guardar</button>
+        <ng-template #btnactive>
             <button class="button is-acciones"(click)="onGuardar($event)" id="edit" >Guardar</button>
          </ng-template>
         <button class="button is-active-cancel" (click)="onCancel($event)" id="dele">Cancelar</button>
