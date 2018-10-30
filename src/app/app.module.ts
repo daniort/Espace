@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroup,FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
@@ -18,6 +18,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import {AlmacenService} from './servicios/almacen.service';
 import {HomeService} from './servicios/home.service';
 import {DeudasService} from './servicios/deudas.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import {DeudoraService} from './servicios/almacen.service';
 
 
@@ -42,8 +43,10 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes),
    AngularFireModule.initializeApp(environment.FireConfig, 'appTiendaBD'),
+   AngularFirestoreModule,
     FormsModule,
-    AngularFirestoreModule,
+   ReactiveFormsModule,
+   BrowserAnimationsModule
   ],
   providers: [AlmacenService,HomeService,DeudasService],
   bootstrap: [AppComponent]

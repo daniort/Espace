@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators  ,ReactiveFormsModule} from '@angular/forms';
 import { DeudorInterface } from '../../interfaces/deudorinterface';
 import {DeudasService} from '../../servicios/deudas.service';
 
@@ -9,7 +10,10 @@ import {DeudasService} from '../../servicios/deudas.service';
 })
 export class DeudoresComponent implements OnInit {
   //Declaracion de variables
+  myForm: FormGroup;
+  //////////////////////////////////////7
   deudoritem:DeudorInterface[];
+  deudoritemFilter:DeudorInterface[];
   deudaParaEditar:DeudorInterface;
   deudornuevo:DeudorInterface={
       nombre:'',
@@ -29,16 +33,40 @@ export class DeudoresComponent implements OnInit {
   mencrearState:boolean=false;
   menediState:boolean=false;
   mendeleState:boolean=false;
-  constructor( public DeudasService:DeudasService) { }
+  byBuscar:string;
+  filtroActive:boolean;
+  constructor( public DeudasService:DeudasService,
+                          private fb:FormBuilder) { }
   ngOnInit() {
     this.DeudasService.getDeudas().subscribe(deuda =>{
-      this.deudoritem=deuda;
-       for (let entry of this.deudoritem) {
-       this.totalDeudas += entry.cantidad;
-       console.log(this.totalDeudas);
+            this.deudoritem=deuda;
+             for (let unaDeuda of this.deudoritem) {
+             this.totalDeudas += unaDeuda.cantidad;
+           }
+       });
+    this.myForm = this.fb.group({ buscar: '' });
+    this.myForm.get('buscar').valueChanges.subscribe(val =>{
+    if (val.length != 0){ this.getDeudasByNombre(val)  }  });
+
   }
-    });
-  }
+  getDeudasByNombre(val:string){
+    console.log(val);
+    for (let i = 0; i < this.deudoritem.length; i++) {
+      let k=0;
+      while (this.deudoritem[i].nombre.charAt(k)==val.charAt(k)) {
+      console.log("white con k de:");
+        //if (k==val.length) {
+          //  this.deudoritemFilter.push(this.deudoritem[i]);
+        //}
+        console.log(k);
+        k=k+1;
+
+        }
+      }
+      console.log(this.deudoritemFilter);
+      console.log("**************************")
+    }
+
   onCreateDeuda($event){
         this.crearState=true;
   }
@@ -59,7 +87,13 @@ export class DeudoresComponent implements OnInit {
     this.desbloq = false;
     this.abono=0;
     this.deudaParaEditar=null;
-    this.deudornuevo=null;
+    this.deudornuevo={
+        nombre:'',
+        cantidad:0,
+        descripcion:'',
+        nota:'',
+        fecha:'',
+    };
   }
   onDeleteConfirmer($event){
     this.resto=this.deudaParaEditar.cantidad - this.abono;
@@ -107,4 +141,6 @@ export class DeudoresComponent implements OnInit {
        this.mendeleState = false;
      }, 2500);
   }
+
+
 }

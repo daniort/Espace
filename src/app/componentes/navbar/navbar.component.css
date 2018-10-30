@@ -22,3 +22,10 @@ button{
   .fa-bars{
     color: white;
   }
+  .fa-times{
+    color: white;
+  }
+  #btn-nav{
+      text-align: right;
+      align-items: right;
+  }

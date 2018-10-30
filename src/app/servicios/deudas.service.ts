@@ -5,6 +5,8 @@ import { DeudorInterface } from '../interfaces/deudorinterface';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +17,8 @@ export class DeudasService {
 
   constructor(public db: AngularFirestore) {
     this.DeudasCollection = db.collection<DeudorInterface>('deudas', ref => ref.orderBy('fecha','desc'));
+  }
+  getDeudas(){
     this.deudas= this.DeudasCollection.snapshotChanges().pipe(
       map(actions => actions.map(a=>{
         const data = a.payload.doc.data() as DeudorInterface;
@@ -22,10 +26,10 @@ export class DeudasService {
         return {id, ...data};
       }))
     );
-  }
-  getDeudas(){
     return this.deudas;
   }
+
+
   addDeuda(deuda:DeudorInterface){
     const fechaNow = Date.now();
     deuda.fecha=fechaNow;

@@ -2,12 +2,17 @@
 <div class="container ">
 
 <!-- botones -->
-<div class="columns botones" >
-  <div class="column is-four-fifths">
-      <input class="input is-primary buscar inputs" [(ngModel)]="searchText" type="text" placeholder="Buscar en la Lista" id="">
+<div class="columns is-desktop botones" >
+  <div class="column is-four-fifths form-group">
+    <div [formGroup]="myForm">
+      <input class="input is-primary buscar inputs"
+         formControlName="buscar"
+         type="text" placeholde r="Buscar Cliente en la Lista" >
+  </div>
   </div>
   <div class="column">
-    <button class="button is-primary inputs" (click)="onCreateDeuda($event)" type="submit">
+    <button class="button is-primary inputs"
+    (click)="onCreateDeuda($event)" type="submit">
       <i class="fas fa-plus"></i>
        Agregar Deuda</button>
   </div>
@@ -27,7 +32,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="tr-body"  *ngFor="let duda of deudoritem;let i=index">
+      <tr class="tr-body"  *ngFor="let duda of deudoritem;let i=index ">
          <th>{{i}}</th>
          <th>{{ duda.fecha | date:'d/M/y'}}</th>
          <th>{{duda.nombre}}</th>
@@ -146,8 +151,7 @@
             <div class="field">
               <label  class="label">Nombre Completo</label>
               <div class="control">
-                  <input
-                  [(ngModel)]="deudornuevo.nombre"
+                  <input  [(ngModel)]="deudornuevo.nombre"
                   #nombre="ngModel" name="nombre"  type="text"
                   class="input"  placeholder="Juanito Oso" minlength="8" maxlength="40" required>
                   <div class="help" *ngIf="nombre.touched && !nombre.valid">
