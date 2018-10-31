@@ -1,7 +1,7 @@
 
 
 /* Sidebar Styles */
-.navbar-inverse, button{
+.navbar, button{
   background-color:  #00d1b2;
 }
 #title-nav{
@@ -15,4 +15,17 @@ button{
 .navbar-item:hover {
     background-color: #00d1b0; /* Green */
     color: white;
+  }
+  strong{
+    color: black;
+  }
+  .fa-bars{
+    color: white;
+  }
+  .fa-times{
+    color: white;
+  }
+  #btn-nav{
+      text-align: right;
+      align-items: right;
   }

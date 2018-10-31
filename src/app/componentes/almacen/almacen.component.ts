@@ -8,7 +8,7 @@ import { ProductoInterface } from '../../interfaces/productointerface';
   styleUrls: ['./almacen.component.css']
 })
 export class AlmacenComponent implements OnInit {
-  productoitem: ProductoInterface[];
+productoitem: ProductoInterface[];
 productoeditar:ProductoInterface;
 productonuevo:ProductoInterface={
         nombre:'',
@@ -16,7 +16,7 @@ productonuevo:ProductoInterface={
         cantidad:0,
         venta:0,
       };
-    editState:boolean=false;
+  editState:boolean=false;
   deleteState:boolean=false;
   createState:boolean=false;
   idToDelete:string;
