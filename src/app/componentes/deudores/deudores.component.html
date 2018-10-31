@@ -31,7 +31,7 @@
         <th>Acciones</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="filtroActive==null && filtroVacio==null">
       <tr class="tr-body"  *ngFor="let duda of deudoritem;let i=index ">
          <th>{{i}}</th>
          <th>{{ duda.fecha | date:'d/M/y'}}</th>
@@ -39,8 +39,7 @@
          <th>{{duda.descripcion}}</th>
            <th>
              <label *ngIf="duda.nota.length == 0" class="datoVacio">Sin Nota</label>
-             <label *ngIf="duda.nota.length >= 1" class="">{{duda.nota}}</label>
-           </th>
+             <label *ngIf="duda.nota.length >= 1" class="">{{duda.nota}}</label>    </th>
            <th class="signo"> <span><i class="fas fa-dollar-sign"></i></span> </th>
            <th  class="celda-numero" >
              <label *ngIf="duda.cantidad == 0" class="datoVacio">0.00</label>
@@ -53,16 +52,109 @@
             <i class="fas fa-money-bill-alt"(click)="onSaldarDeuda($event,duda)"></i></th>
       </tr>
     </tbody>
-    <tfoot class="white-ter">
+    <tbody *ngIf="filtroActive==false && filtroVacio==null">
+      <tr class="tr-body"  *ngFor="let duda of deudoritemAlll;let i=index ">
+         <th>{{i}}</th>
+         <th>{{ duda.fecha | date:'d/M/y'}}</th>
+         <th>{{duda.nombre}}</th>
+         <th>{{duda.descripcion}}</th>
+           <th>
+             <label *ngIf="duda.nota.length == 0" class="datoVacio">Sin Nota</label>
+             <label *ngIf="duda.nota.length >= 1" class="">{{duda.nota}}</label>    </th>
+           <th class="signo"> <span><i class="fas fa-dollar-sign"></i></span> </th>
+           <th  class="celda-numero" >
+             <label *ngIf="duda.cantidad == 0" class="datoVacio">0.00</label>
+              <label for="" *ngIf="duda.cantidad != 0">
+               {{duda.cantidad}}<label *ngIf="duda.cantidad % 1 == 0">.00</label><label *ngIf="duda.cantidad % 1 != 0">0</label>
+             </label>
+           </th>
+         <th class="btn-acciones">
+            <i class="fas fa-edit" (click)="onEditDeuda($event,duda)"></i>
+            <i class="fas fa-money-bill-alt"(click)="onSaldarDeuda($event,duda)"></i></th>
+      </tr>
+    </tbody>
+    <tbody *ngIf="filtroActive==true && iltroVacio==null">
+      <tr class="tr-body"  *ngFor="let duda of deudoritemFilter;let i=index ">
+         <th>{{i}}</th>
+         <th>{{ duda.fecha | date:'d/M/y'}}</th>
+         <th>{{duda.nombre}}</th>
+         <th>{{duda.descripcion}}</th>
+           <th>
+             <label *ngIf="duda.nota.length == 0" class="datoVacio">Sin Nota</label>
+             <label *ngIf="duda.nota.length >= 1" class="">{{duda.nota}}</label>    </th>
+           <th class="signo"> <span><i class="fas fa-dollar-sign"></i></span> </th>
+           <th  class="celda-numero" >
+             <label *ngIf="duda.cantidad == 0" class="datoVacio">0.00</label>
+              <label for="" *ngIf="duda.cantidad != 0">
+               {{duda.cantidad}}<label *ngIf="duda.cantidad % 1 == 0">.00</label><label *ngIf="duda.cantidad % 1 != 0">0</label>
+             </label>
+           </th>
+         <th class="btn-acciones">
+            <i class="fas fa-edit" (click)="onEditDeuda($event,duda)"></i>
+            <i class="fas fa-money-bill-alt"(click)="onSaldarDeuda($event,duda)"></i></th>
+      </tr>
+    </tbody>
+    <tbody *ngIf="filtroVacio==true && filtroActive==false ">
+      <tr class="vacio" >
+         <th></th>
+         <th></th>
+         <th><i class="fas fa-file-excel"></i>No hay Resultados.</th>
+         <th></th>
+           <th>  </th>
+           <th class="signo"></th>
+           <th  class="celda-numero" >  </th>
+         <th class="btn-acciones"></th>
+      </tr>
+    </tbody>
+
+    <tfoot class="white-ter" *ngIf="filtroActive==null && filtroVacio==null"><!-- resultados iiciales -->
       <tr>
         <th></th>
-        <th></th>
+        <th>resultados iiciales</th>
         <th></th>
         <th></th>
         <th class="deuda-total">Deuda Total:</th>
         <th class="signo"><i class="fas fa-dollar-sign"></i></th>
         <th class="celda-numero">{{totalDeudas}}<label *ngIf="totalDeudas % 1 == 0">.00</label><label *ngIf="totalDeudas % 1 != 0">0</label>
         </th>
+        <th></th>
+      </tr>
+    </tfoot>
+    <tfoot class="white-ter" *ngIf="filtroActive==false && filtroVacio==null"><!-- todos los resultados no inciales -->
+      <tr>
+        <th></th>
+        <th></th>
+        <th>resultados no inciales</th>
+        <th></th>
+        <th class="deuda-total">Deuda Total:</th>
+        <th class="signo"><i class="fas fa-dollar-sign"></i></th>
+        <th class="celda-numero">{{totalDeudas}}<label *ngIf="totalDeudas % 1 == 0">.00</label><label *ngIf="totalDeudas % 1 != 0">0</label>
+        </th>
+        <th></th>
+      </tr>
+      </tfoot>
+    <tfoot class="white-ter"  *ngIf="filtroActive==true && filtroVacio==null"> <!-- filtro con resultados -->
+      <tr>
+        <th></th>
+        <th></th>
+        <th> filtro con resultados</th>
+        <th></th>
+        <th class="deuda-total">Deuda Total:</th>
+        <th class="signo"><i class="fas fa-dollar-sign"></i></th>
+        <th class="celda-numero">{{totalDeudas}}<label *ngIf="totalDeudas % 1 == 0">.00</label><label *ngIf="totalDeudas % 1 != 0">0</label>
+        </th>
+        <th></th>
+      </tr>
+    </tfoot>
+    <tfoot class="white-ter" *ngIf="filtroVacio==true && filtroActive==false "> <!-- filtro  vacio -->
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="deuda-total"></th>
+        <th class="signo"></th>
+        <th class="celda-numero"> </th>
         <th></th>
       </tr>
     </tfoot>

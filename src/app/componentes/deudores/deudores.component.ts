@@ -13,7 +13,8 @@ export class DeudoresComponent implements OnInit {
   myForm: FormGroup;
   //////////////////////////////////////7
   deudoritem:DeudorInterface[];
-  deudoritemFilter:DeudorInterface[];
+  deudoritemFilter:string[];
+  deudoritemAlll:string[];
   deudaParaEditar:DeudorInterface;
   deudornuevo:DeudorInterface={
       nombre:'',
@@ -34,7 +35,8 @@ export class DeudoresComponent implements OnInit {
   menediState:boolean=false;
   mendeleState:boolean=false;
   byBuscar:string;
-  filtroActive:boolean;
+  filtroActive:boolean=null;
+  filtroVacio:boolean=null;
   constructor( public DeudasService:DeudasService,
                           private fb:FormBuilder) { }
   ngOnInit() {
@@ -46,27 +48,58 @@ export class DeudoresComponent implements OnInit {
        });
     this.myForm = this.fb.group({ buscar: '' });
     this.myForm.get('buscar').valueChanges.subscribe(val =>{
-    if (val.length != 0){ this.getDeudasByNombre(val)  }  });
-
-  }
-  getDeudasByNombre(val:string){
-    console.log(val);
-    for (let i = 0; i < this.deudoritem.length; i++) {
-      let k=0;
-      while (this.deudoritem[i].nombre.charAt(k)==val.charAt(k)) {
-      console.log("white con k de:");
-        //if (k==val.length) {
-          //  this.deudoritemFilter.push(this.deudoritem[i]);
-        //}
-        console.log(k);
-        k=k+1;
-
+      if (val.length != 0){
+        let  myArray2=this.getDeudasByNombre(val);
+        if (myArray2.length!=0) {
+          //se enceuntran resultados
+            this.filtroActive=true;
+            this.filtroVacio=null;
+            this.deudoritemFilter=myArray2;
+        }else{
+          //Vacio
+          this.filtroActive=false;
+          this.filtroVacio=true;
+          this.deudoritemAlll=this.getDeudasAll();
         }
+        console.log(myArray2)
+      }else{
+        //todos las deudas
+        this.filtroActive=false;
+        this.filtroVacio=null;
+        this.deudoritemAlll=this.getDeudasAll();
       }
-      console.log(this.deudoritemFilter);
-      console.log("**************************")
-    }
+    });
+  }
 
+  getDeudasAll():string[]{
+    let myArray3=[];
+    for (let entry of this.deudoritem) {
+        myArray3.push(entry);
+    }
+    return myArray3;
+  }
+  getDeudasByNombre(val:string):string[]{
+    console.log(val);
+    let encontrados=0;
+    let myArray=[];
+    for (let entry of this.deudoritem) {
+      let k=0
+      for (let i = 0; i < val.length; i++) {
+        let a=entry.nombre.charAt(i).toLowerCase( )
+        let b=val.charAt(i).toLowerCase( )
+          if (a===b) {
+              k=k+1;
+            }else{
+              k=0;
+            }
+      }
+      if (k===val.length) {
+          myArray.push(entry);
+          encontrados=encontrados+1;
+      }
+    }
+    return  myArray
+  }
   onCreateDeuda($event){
         this.crearState=true;
   }
@@ -141,6 +174,5 @@ export class DeudoresComponent implements OnInit {
        this.mendeleState = false;
      }, 2500);
   }
-
 
 }

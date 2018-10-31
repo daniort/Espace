@@ -222,3 +222,10 @@ fa-dollar-sign{
   width: 100%;
   color: #00d1b2;
 }
+.vacio{
+ background-color: #fff5f7
+}
+  vacio:hover{
+    background-color: #fff5f7 ;
+    border-right: 7px solid  #ff3860;
+}
